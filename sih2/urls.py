@@ -8,6 +8,7 @@ urlpatterns = [
     path("transport2",views.transport2, name="transport2"),
     path("transport",views.transport, name="transport"),
     path("login",views.login, name="login"),
+    path("logout",views.logout, name="logout"),
     path("transport-login",views.transportlogin, name="transport-login"),
     path("register",views.register, name="register"),
     path("farmerregister",views.farmerregister, name="farmerregister"),
