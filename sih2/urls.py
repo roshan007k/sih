@@ -14,5 +14,6 @@ urlpatterns = [
     path("farmerregister",views.farmerregister, name="farmerregister"),
     path("farmerlogin",views.farmerlogin, name="farmerlogin"),
     path("expertlogin",views.expertlogin, name="exxpertlogin"),
-    path("experthome",views.experthome, name="experthome")
+    path("experthome",views.experthome, name="experthome"),
+    path("farmerprofile",views.farmerprofile, name="farmerprofile")
 ]
