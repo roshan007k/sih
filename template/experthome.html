@@ -73,7 +73,12 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
               <li class="nav-item active"><a href="#" class="nav-link">Notifications</a></li>
 			  <li class="nav-item"><a href="#" class="nav-link">News</a></li>
               <li class="nav-item"><a href="#" class="nav-link">Go Live!</a></li>
-              <li class="nav-item"><a href="/" class="nav-link">Logout</a></li>
+              {% if user.is_authenticated %}
+              <li class="nav-item">Hello, {{user.username}}</li>
+              <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+              {% else %}
+              <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+              {% endif %}
             </li>
 	        </ul>
 	      </div>

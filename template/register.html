@@ -124,6 +124,13 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
                 <input type="submit" value="Register" class="btn btn-primary py-3 px-5"><br><br>
                 <a href="/register" style="color: blue; ">Already User??</a>
               </div>
+              <div class="form-group">
+                {% for message in messages %}
+                <p>
+                <h2 style="color: rgb(204, 25, 25); font: 1.5em sans-serif; text-align: center;">{{message}}</h2>
+                {% endfor %}
+              </p>
+              </div>
             </form>
           </div>
         </div>

@@ -81,7 +81,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
             </li>
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-	          <li class="nav-item active"><a href="login.html" class="nav-link">Login</a></li>
+	          <li class="nav-item active"><a href="/transportlogin" class="nav-link">Login</a></li>
 	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 
 	        </ul>
@@ -105,58 +105,58 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
       <div class="container">
         <div class="row d-flex justify-content-center">
           <div class="col-md-10 order-md-last d-flex">   
-            <form action="#" class="bg-white p-5 contact-form" >
+            <form action="transport" class="bg-white p-5 contact-form" method="POST">
+              {% csrf_token %}
               <div class="form-group">
                   <h2> Transport Details</h2>
                   <div  class="form-group">
-                  <input type="text" class="form-control" placeholder="Transport Name" required>
+                  <input type="text" class="form-control" name="agency_name" placeholder="Transport Name" required>
                 </div>
                 <div  class="form-group">
-                <input type="text" class="form-control" placeholder="First Name" required>
+                <input type="text" class="form-control" name="transport_name" placeholder="First Name" required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Last Name" required>
+                <input type="text" class="form-control" name="transport_lastname" placeholder="Last Name" required>
               </div>
               <div  class="form-group">
-                <input type="password" class="form-control" placeholder="Password" required>
+                <input type="password" class="form-control" name="transport_password" placeholder="Password" required>
               </div>
               <div  class="form-group">
-                <input type="password" class="form-control" placeholder="Confirm Password" required>
+                <input type="password" class="form-control" name="transport_confirmpassword" placeholder="Confirm Password" required>
               </div>
               <div class="form-group">
-                <input type="text" pattern="[0-9]" class="form-control" placeholder="No. of trucks" required>
+                <input type="text" class="form-control" name="transport_trucks" placeholder="No. of trucks" required>
               </div>
               <div class="form-group">
-                <input type="text" pattern="[0-9]{10}" maxlength="10" class="form-control" placeholder="Contact no."required>
+                <input type="text" maxlength="10" class="form-control" name="transport_number" placeholder="Contact no."required>
               </div>
               <hr>
-              <h2>User Profile</h2>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Address 1"required>
+                <input type="text" class="form-control" name="transport_address" placeholder="Address 1"required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Address 2(Landmark)">
+                <input type="text" class="form-control" name="transport_address1" placeholder="Address 2(Landmark)">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="State"required>
+                <input type="text" class="form-control" name="transport_state" placeholder="State"required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="District"required>
+                <input type="text" class="form-control" name="transport_district" placeholder="District"required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Taluka">
+                <input type="text" class="form-control" name="transport_taluka" placeholder="Taluka">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="City"required>
+                <input type="text" class="form-control" name="transport_city" placeholder="City"required>
               </div>
               <div class="form-group">
-                <input type="text"pattern="[0-9]{6}" maxlength = "6"  class="form-control" placeholder="Postal/Zip code"required>
+                <input type="text" maxlength = "6"  class="form-control" name="transport_code" placeholder="Postal/Zip code"required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Aadhar Card no."required>
+                <input type="text" class="form-control" name="transport_aadhar" placeholder="Aadhar Card no."required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="GST no."required>
+                <input type="text" class="form-control" name="transport_gst" placeholder="GST no."required>
               </div>
               <div class="form-group">
                   <span style="color: black; font-size: 1.5em;">Upload Aadhar card: </span> 
@@ -164,9 +164,14 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
             </div>
               <div class="form-group">
                 <input type="submit" value="Register" class="btn btn-primary py-3 px-5">
-                <a href="/transport-login"><input type="button" value="Cancel" class="btn btn-primary" style="background-color:white; color:black;float: right;margin-left:1%;"></a>
+                <a href="/transportlogin"><input type="button" value="Cancel" class="btn btn-primary" style="background-color:white; color:black;float: right;margin-left:1%;"></a>
                 <input type="reset" value="Reset "class="btn btn-primary" style="background-color:white; color:black;float: right;" >
               </div>
+              <div class="form-group">
+                {% for message in messages %}
+                <p>
+                <h2 style="color: rgb(204, 25, 25); font: 1.5em sans-serif; text-align: center;">{{message}}</h2>
+                {% endfor %}
             </form>
           </div>
         </div>

@@ -69,7 +69,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
 	          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -106,54 +106,58 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
       <div class="container">
         <div class="row d-flex justify-content-center">
           <div class="col-md-6 order-md-last d-flex">   
-            <form action="#" class="bg-white p-5 contact-form" >
-            
+            <form action="farmerregister" class="bg-white p-5 contact-form" method="POST" >
+              {% csrf_token %}
               <div class="form-group">
                 <span>If already a registered user<a href="/farmerlogin" style="color: blue; ">  Click Here</a></span><br><br>
                 <h2 style="text-align: center; color: green;">Farmer/Seller Registration</h2>
-                <input type="text" class="form-control" placeholder="First Name" required>
+                <input type="text" class="form-control" name="first_name" placeholder="First Name" required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Last Name" required>
+                <input type="text" class="form-control"name="last_name" placeholder="Last Name" required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Username" required>
+                <input type="text" class="form-control" name="user_name"placeholder="Username" required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Password"required>
+                <input type="password" class="form-control"name="farmer_password" placeholder="Password"required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Confirm Password"required>
+                <input type="password" class="form-control" name="confirm_farmerpassword" placeholder="Confirm Password"required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Email">
+                <input type="text" class="form-control" name="farmer_email" placeholder="Email">
               </div>
               <div class="form-group">
-                <input type="text" pattern="[0-9]" maxlength="10" class="form-control" placeholder="Contact no."required>
+                <input type="text" name="farmer_no" class="form-control" placeholder="Contact no."required>
               </div>
               <hr>
-              <h2 style="text-align: center; color: green;">Farmer/Seller Profile</h2>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Address 1"required>
+                <input type="text" class="form-control" name="farmer_address" placeholder="Address 1"required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Address 2(Landmark)">
+                <input type="text" class="form-control" name="farmer_address1" placeholder="Address 2(Landmark)">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="State"required>
+                <input type="text" class="form-control" name="farmer_state" placeholder="State"required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="District"required>
+                <input type="text" class="form-control" name="farmer_district" placeholder="District"required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Taluka">
+                <input type="text" class="form-control" name="farmer_taluka" placeholder="Taluka">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="City"required>
+                <input type="text" class="form-control" name="farmer_city" placeholder="City"required>
               </div>
               <div class="form-group">
-                <input type="text"pattern="[0-9]" maxlength = "6"  class="form-control" placeholder="Postal/Zip code"required>
+                <input type="text" name="farmer_code"  class="form-control" placeholder="Postal/Zip code"required>
               </div>
+              <div class="form-group">
+                {% for message in messages %}
+                <p>
+                <h2 style="color: rgb(204, 25, 25); font: 1.5em sans-serif; text-align: center;">{{message}}</h2>
+                {% endfor %}
               <div class="form-group">
                 <input type="submit" value="Register" class="btn btn-primary py-3 px-5">
                 <a href="index.html"><input type="button" value="Cancel" class="btn btn-primary" style="background-color:white; color:black;float: right;margin-left:1%;"></a>

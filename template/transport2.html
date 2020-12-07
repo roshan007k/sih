@@ -116,7 +116,12 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 			  <li class="nav-item"><a href="about.html" class="nav-link">Profile</a></li>
 			  <li class="nav-item"><a href="transport.html"class="nav-link">Notifications</a></li>
 			  <li class="nav-item"><a href="FarmerRegister.html"class="nav-link">Recent Deliveries</a></li>
-			  <li class="nav-item"><a href="login.html" class="nav-link">Logout</a></li>
+			  {% if user.is_authenticated %}
+			  <li class="nav-item">Hello, {{user.username}}</li>
+			  <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+			  {% else %}
+			  <li class="nav-item"><a href="/transportlogin" class="nav-link">Login</a></li>
+			  {% endif %}
 			  <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 			  <li class="nav-item"><a href="connect.html" class="nav-link" style="background-color:  #82AE46;
 				color: #fff;margin-top:12px; padding: 10px;">Connect to Farm</a></li>

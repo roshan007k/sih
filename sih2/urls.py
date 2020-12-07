@@ -9,11 +9,11 @@ urlpatterns = [
     path("transport",views.transport, name="transport"),
     path("login",views.login, name="login"),
     path("logout",views.logout, name="logout"),
-    path("transport-login",views.transportlogin, name="transport-login"),
+    path("transportlogin",views.transportlogin, name="transportlogin"),
     path("register",views.register, name="register"),
     path("farmerregister",views.farmerregister, name="farmerregister"),
     path("farmerlogin",views.farmerlogin, name="farmerlogin"),
-    path("expertlogin",views.expertlogin, name="exxpertlogin"),
+    path("expertlogin",views.expertlogin, name="expertlogin"),
     path("experthome",views.experthome, name="experthome"),
     path("farmerprofile",views.farmerprofile, name="farmerprofile")
 ]
