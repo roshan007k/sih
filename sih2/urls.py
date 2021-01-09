@@ -15,5 +15,9 @@ urlpatterns = [
     path("farmerlogin",views.farmerlogin, name="farmerlogin"),
     path("expertlogin",views.expertlogin, name="expertlogin"),
     path("experthome",views.experthome, name="experthome"),
-    path("farmerprofile",views.farmerprofile, name="farmerprofile")
+    path("farmerprofile",views.farmerprofile, name="farmerprofile"),
+    path("index2",views.index2, name="index2"),
+    path("cart",views.cart, name="cart"),
+    path("checkout",views.checkout, name="checkout"),
+    path("product",views.product, name="product"),
 ]

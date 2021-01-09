@@ -5,6 +5,14 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .models import Product,Farmer_register,Transport_register
 # Create your views here.
+def product(request):
+    return render(request,"product.html")
+def cart(request):
+    return render(request,"cart.html")
+def checkout(request):
+    return render(request,"checkout.html")
+def index2(request):
+    return render(request,"index2.html")
 def index(request):
     return  render(request,"index.html")
 def transport2(request):

@@ -102,8 +102,8 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
           </button>
 	    </div>
 		<div class="container mr-3">
-		  <div  class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
+		  <div  class="collapse navbar-collapse " id="ftco-nav">
+	        <ul class="navbar-nav mr-auto ">
 	          <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
 	          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
@@ -123,10 +123,11 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 			  {% if user.is_authenticated %}
 			  <li class="nav-item">Hello, {{user.username}}</li>
 			  <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+			  <li class="nav-item"><a href="/" class="nav-link">Profile</a></li>
 			  {% else %}
 			  <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
 			  {% endif %}
-			  <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+			  <li class="nav-item cta cta-colored"><a href="/cart" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 			  <li class="nav-item"><a href="connect.html" class="nav-link" style="background-color:  #82AE46;
 				color: #fff;margin-top:12px; padding: 10px;">Connect to Farm</a></li>
 
@@ -294,12 +295,12 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
     		<div class="row">
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="static/images/product-1.jpg" alt="Colorlib Template">
+    					<a href="/product" class="img-prod"><img class="img-fluid" src="static/images/product-1.jpg" alt="Colorlib Template">
     						<span class="status">30%</span>
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="product-single.html">Bell Pepper</a></h3>
+    						<h3><a href="/product">Bell Pepper</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
 		    						<p class="price"><span class="mr-2 price-dc">&#8377 120.00</span><span class="price-sale">&#8377 80.00</span></p>
