@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .models import Product,Farmer_register,Transport_register, Order,Customer,OrderItem,ShippingAddress,ToDeliver,CompletedDeliveries
+from .models import Product,Farmer_register,Transport_register, Order,Customer,OrderItem,ShippingAddress,ToDeliver,CompletedDeliveries,Comment
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.http import JsonResponse
@@ -13,20 +13,17 @@ from . utils import CookieCart ,cartData,guestOrder
 from django.core.serializers.json import DjangoJSONEncoder
 # Create your views here.
 relation=[]
-
 def profile_farmer(request):
     if request.user.is_authenticated:
 
         user1=request.user.get_username()
         user2=Farmer_register.objects.filter(username=user1)
         if user2.exists():
-
             return render(request,'profile_farmer.html',{'user2':user2})
         else:
             return render(request,'profile_farmer.html')
     else:
         return render(request,'profile_farmer.html')
-
 def profile_transport(request):
     if request.user.is_authenticated:
 
@@ -42,8 +39,47 @@ def profile_transport(request):
     else:
         return render(request,'profile_transport.html')
 
-def product(request):
-    return render(request,"product.html")
+
+
+
+
+
+
+
+
+
+
+
+        
+def product(request, id):
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+    #product = Product.objects.filter(id=id)
+    product1 = Product.objects.get(id=id)
+    if request.method=='POST':
+        subject = request.POST['subject']
+        comment = request.POST['comment']
+        rate = request.POST['rate']
+        current_user = request.user
+        
+        #customer = Customer.objects.get(id=id)
+    
+        if Customer.objects.filter(id=id).exists():
+            customer = Customer.objects.get(id=id)
+            comment1 = Comment.objects.create(product = product1, user = current_user, customer = customer, comment = comment, rate = rate, subject=subject)
+            comment1.save()
+            messages.info(request, "Review Sent Successfully")
+            c = Comment.objects.filter(product = product1)
+            print(c)
+            return render(request,"product.html", {'product':product1, 'cartItems' : cartItems, 'c' : c})
+        else:
+            messages.info(request, "Plz buy the product first")
+            return render(request, "product.html", {'product':product1, 'cartItems' : cartItems})
+    
+    c = Comment.objects.filter(product = product1)
+    return render(request,"product.html", {'product':product1, 'cartItems' : cartItems, 'c' : c})
 def cart(request):
     data = cartData(request)
     cartItems = data['cartItems']

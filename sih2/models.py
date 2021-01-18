@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
+from django.forms import ModelForm
 # Create your models here.
 class Farmer_register(models.Model):
     firstname=models.CharField(max_length=50)
@@ -69,7 +70,7 @@ class Customer(models.Model):
     password=models.CharField(max_length=200,default=1)
 
     def __str__(self):  
-        return self.user
+        return self.name
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
@@ -151,3 +152,20 @@ class ToDeliver(models.Model):
 
     def __str__(self):
         return self.address
+class Comment(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    subject = models.CharField(max_length=250, blank=True)
+    comment = models.CharField(max_length=250, blank=True)
+    rate = models.IntegerField(default = 1)
+    timestamp = models.DateField(auto_now_add=True, auto_now=False)
+    class Meta:
+        ordering=['-id']
+    def __str__(self):
+        return self.subject
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['subject', 'comment', 'rate']
