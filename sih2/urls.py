@@ -20,4 +20,10 @@ urlpatterns = [
     path("cart",views.cart, name="cart"),
     path("checkout",views.checkout, name="checkout"),
     path("product",views.product, name="product"),
+    path("update_item",views.updateItem, name="update_item"),
+    path("processOrder",views.processOrder, name= "processOrder"),
+    path("deliveries",views.deliveries, name= "deliveries"),
+    path("completeddeliveries",views.completeddeliveries, name= "completeddeliveries"),
+    path("about",views.about, name="about"),
+    path("blog",views.blog, name="blog"),
 ]

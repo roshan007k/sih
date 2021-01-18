@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'fontawesome-free',
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sih1',
         'USER': 'postgres',
-        'PASSWORD': 'qwerty',
+        'PASSWORD': '1234',
         'HOST': 'localhost'
     }
 }

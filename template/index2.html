@@ -28,7 +28,56 @@
     <link rel="stylesheet" href="{% static 'css1/main.css' %}">
     <link rel="stylesheet" href="{% static '/css1/flaticon.css' %}">
     <link rel="stylesheet" href="{% static '/css1/icomoon.css' %}">
-	<link rel="stylesheet" href="{% static 'css1/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css1/style.css' %}">
+  <script type= "text/javascript">
+    var user = '{{request.user}}'
+
+    function getToken(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+  const csrftoken = getToken('csrftoken');
+  //cookie
+  function getCookie(name) {
+    // Split cookie string and get all individual name=value pairs in an array
+    var cookieArr = document.cookie.split(";");
+
+    // Loop through the array elements
+    for(var i = 0; i < cookieArr.length; i++) {
+        var cookiePair = cookieArr[i].split("=");
+
+        /* Removing whitespace at the beginning of the cookie name
+        and compare it with the given string */
+        if(name == cookiePair[0].trim()) {
+            // Decode the cookie value and return
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+
+    // Return null if not found
+    return null;
+}
+var cart = JSON.parse(getCookie('cart'))
+
+if (cart == undefined){
+  cart = {}
+  console.log('Cart Created!', cart)
+  document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+}
+console.log('Cart:', cart)
+
+  </script>
 	<script>
 		(function () {
     var div = document.createElement("div");
@@ -97,7 +146,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
     </div>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container ml-2">
-        <a class="navbar-brand" href="index.html">AgroBuzz</a>
+        <a class="navbar-brand" href="/">AgroBuzz</a>
         <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="oi oi-menu" ></span> Menu
           </button>
@@ -109,18 +158,17 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 	          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="shop.html">Shop</a>
-              	<a class="dropdown-item" href="wishlist.html">Wishlist</a>
-                <a class="dropdown-item" href="product-single.html">Single Product</a>
-                <a class="dropdown-item" href="cart.html">Cart</a>
-                <a class="dropdown-item" href="checkout.html">Checkout</a>
+              	<a class="dropdown-item" href="/">Shop</a>
+                <a class="dropdown-item" href="/product">Single Product</a>
+                <a class="dropdown-item" href="/cart">Cart</a>
+                <a class="dropdown-item" href="/checkout">Checkout</a>
               </div>
             </li>
-			  <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+			  <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 			  <li class="nav-item"><a href="/transportlogin"class="nav-link">Transport Agency</a></li>
 			  <li class="nav-item"><a href="/expertlogin" class="nav-link">Expert Login</a></li>
 			  <li class="nav-item"><a href="/farmerregister"class="nav-link">Sell</a></li>
-			  <li class="nav-item"><a href="/farmerregister"class="nav-link">Blog</a></li>
+			  <li class="nav-item"><a href="/blog"class="nav-link">Blog</a></li>
 			  {% if user.is_authenticated %}
 			  <li class="nav-item">Hello, {{user.username}}</li>
 			  <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
@@ -128,10 +176,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 			  {% else %}
 			  <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
 			  {% endif %}
-			  <li class="nav-item cta cta-colored"><a href="/cart" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-			  <li class="nav-item"><a href="connect.html" class="nav-link" style="background-color:  #82AE46;
-				color: #fff;margin-top:12px; padding: 10px;">Connect to Farm</a></li>
-
+			  <li class="nav-item cta cta-colored"><a href="/cart" class="nav-link"><span class="icon-shopping_cart"></span>{{cartItems}}</a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -280,6 +325,14 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="{% static 'js/google-map.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+  <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
     
   </body>
 </html>
