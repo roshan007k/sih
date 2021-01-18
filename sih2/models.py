@@ -1,28 +1,8 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
+from django.forms import ModelForm
 # Create your models here.
-class Product(models.Model):
-    FoodGrains = 1
-    CashCrops = 2
-    PlantationCrops = 3
-    HorticultureCrops = 4
-    PRODUCT_TYPES = (
-        (FoodGrains, 'Food'),
-        (CashCrops, 'Cash'),
-        (PlantationCrops, 'Plantation'),
-        (HorticultureCrops, 'Horticulture'),
-    )
-    name = models.CharField(max_length=50)
-    description = models.CharField(max_length=100, blank=True)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
-    img = models.ImageField(null=True, blank=True, upload_to = 'static/images')
-    product_type = models.PositiveSmallIntegerField(choices=PRODUCT_TYPES)
-    timestamp = models.DateField(auto_now_add=True, auto_now=False)
-    
-    def __str__(self):
-	    return self.name
-
 class Farmer_register(models.Model):
     firstname=models.CharField(max_length=50)
     lastname=models.CharField(max_length=50)
@@ -38,11 +18,15 @@ class Farmer_register(models.Model):
     taluka=models.CharField(max_length=50)
     city=models.CharField(max_length=50)
     zipcode=models.CharField(max_length=50)
+
+    def __str__(self):
+	    return self.username
 class Transport_register(models.Model):
     agencyname=models.CharField(max_length=100)
     transportname1=models.CharField(max_length=100)
     transportname2=models.CharField(max_length=100)
     transportpassword=models.CharField(max_length=50)
+    transportcost=models.BigIntegerField()
     transporttruck=models.BigIntegerField()
     transportcontact=models.BigIntegerField()
     transportaddress=models.CharField(max_length=200)
@@ -55,14 +39,38 @@ class Transport_register(models.Model):
     transportaadhar=models.BigIntegerField()
     transportgst=models.BigIntegerField()
     aadhar = models.ImageField(upload_to='images/')
+class Product(models.Model):
+    FoodGrains = 1
+    CashCrops = 2
+    PlantationCrops = 3
+    HorticultureCrops = 4
+    PRODUCT_TYPES = (
+        (FoodGrains, 'Food'),
+        (CashCrops, 'Cash'),
+        (PlantationCrops, 'Plantation'),
+        (HorticultureCrops, 'Horticulture'),
+    )
+    farmer=models.ForeignKey(Farmer_register,on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=50)
+    description = models.CharField(max_length=100, blank=True)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    img = models.ImageField(null=True, blank=True)
+    product_type = models.PositiveSmallIntegerField(choices=PRODUCT_TYPES)
+    timestamp = models.DateField(auto_now_add=True, auto_now=False)
+    
+    def __str__(self):
+	    return self.name
+
+
 
 class Customer(models.Model):
-	user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
-	name = models.CharField(max_length=200, null=True)
-	email = models.CharField(max_length=200)
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200, null=True)
+    email = models.CharField(max_length=200)
+    password=models.CharField(max_length=200,default=1)
 
-	def __str__(self):
-		return self.name
+    def __str__(self):  
+        return self.name
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
@@ -72,6 +80,15 @@ class Order(models.Model):
 
     def __str__(self):
 	    return str(self.id)
+
+    # @property
+    # def shipping(self):
+    #     shipping = False
+    #     orderitems = self.orderitem_set.all()
+    #     for i in orderitems:
+    #         if i.product.digital == False:
+    #             shipping = True
+    #     return shipping
     
     @property
     def get_cart_total(self):
@@ -86,6 +103,7 @@ class Order(models.Model):
 	    return total
 
 class OrderItem(models.Model):
+    farmer=models.ForeignKey(Farmer_register,on_delete=models.SET_NULL, null=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
@@ -99,13 +117,55 @@ class OrderItem(models.Model):
     
 
 class ShippingAddress(models.Model):
-	customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-	order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
-	address = models.CharField(max_length=200, null=False)
-	city = models.CharField(max_length=200, null=False)
-	state = models.CharField(max_length=200, null=False)
-	zipcode = models.CharField(max_length=200, null=False)
-	date_added = models.DateTimeField(auto_now_add=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    address = models.CharField(max_length=200, null=False)
+    city = models.CharField(max_length=200, null=False)
+    state = models.CharField(max_length=200, null=False)
+    zipcode = models.CharField(max_length=200, null=False)
+    date_added = models.DateTimeField(auto_now_add=True)
+    agencyname=models.CharField(max_length=200,null=True)
 
-	def __str__(self):
-		return self.address
+    def __str__(self):
+        return self.address
+class CompletedDeliveries(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    address = models.CharField(max_length=200, null=False)
+    city = models.CharField(max_length=200, null=False)
+    state = models.CharField(max_length=200, null=False)
+    zipcode = models.CharField(max_length=200, null=False)
+    date_added = models.DateTimeField(auto_now_add=True)
+    agencyname=models.CharField(max_length=200,null=True)
+
+    def __str__(self):
+        return self.address
+class ToDeliver(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    address = models.CharField(max_length=200, null=False)
+    city = models.CharField(max_length=200, null=False)
+    state = models.CharField(max_length=200, null=False)
+    zipcode = models.CharField(max_length=200, null=False)
+    date_added = models.DateTimeField(auto_now_add=True)
+    agencyname=models.CharField(max_length=200,null=True)
+
+    def __str__(self):
+        return self.address
+class Comment(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    subject = models.CharField(max_length=250, blank=True)
+    comment = models.CharField(max_length=250, blank=True)
+    rate = models.IntegerField(default = 1)
+    timestamp = models.DateField(auto_now_add=True, auto_now=False)
+    class Meta:
+        ordering=['-id']
+    def __str__(self):
+        return self.subject
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['subject', 'comment', 'rate']

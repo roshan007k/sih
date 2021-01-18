@@ -1,0 +1,181 @@
+{% extends "index2.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>Farmer Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+    	 .inf-content{
+    border:1px solid #DDDDDD;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
+    box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);
+}			                                                      
+    </style>
+</head>
+<body>
+<div class="container bootstrap snippets bootdey">
+<div class="panel-body inf-content">
+    <div class="row">
+        <div class="col-md-2">
+            <img alt="" style="width:70%;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario"> 
+        </div>
+        <div class="col-md-12">
+            <strong style="margin-left:2%">Information</strong><br>
+            <div class="table-responsive">
+            <table class="table table-user-information">
+                <tbody>
+                    {%for user2 in user2 %}
+                    <tr>    
+                        <td>
+                            <strong>
+                                Name                                                
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.firstname}}   
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong> 
+                                Lastname                                                
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.lastname}}   
+                        </td>
+                    </tr>
+
+                    <tr>        
+                        <td>
+                            <strong>
+                                Username                                                
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.username}}  
+                        </td>
+                    </tr>
+
+
+                    <tr>        
+                        <td>
+                            <strong>
+                                Email                                             
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.email}}  
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                Contact Number                                               
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.contact_number}} 
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                Address Line 1                                                
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.address}} 
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                Address Line 2                                            
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.address1}} 
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                State                                            
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.state}} 
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                District                                           
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.district}} 
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                Taluka                                         
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.taluka}} 
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                City                                          
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.city}} 
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                Zip Code                                        
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.zipcode}} 
+                        </td>
+                    </tr>
+                {%endfor%}                                    
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+
+</div> 
+</div>
+<div class="text-center md-3">
+    <button type="button" class="btn btn-success" target="_blank" >Update</button>
+
+</div> 
+                                    
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	
+</script>
+</body>
+</html>
+
+{% endblock content %}
