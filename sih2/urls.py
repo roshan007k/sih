@@ -26,4 +26,6 @@ urlpatterns = [
     path("completeddeliveries",views.completeddeliveries, name= "completeddeliveries"),
     path("about",views.about, name="about"),
     path("blog",views.blog, name="blog"),
+    path("profile_farmer",views.profile_farmer, name="profile_farmer"),
+    path("profile_transport",views.profile_transport, name="profile_transport")
 ]

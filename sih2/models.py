@@ -69,7 +69,7 @@ class Customer(models.Model):
     password=models.CharField(max_length=200,default=1)
 
     def __str__(self):  
-        return self.name
+        return self.user
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)

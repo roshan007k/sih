@@ -1,0 +1,189 @@
+{% extends "index2.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Transport Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+    	 .inf-content{
+    border:1px solid #DDDDDD;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
+    box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);
+}			                                                      
+    </style>
+</head>
+<body>
+<div class="container bootstrap snippets bootdey">
+<div class="panel-body inf-content">
+    <div class="row">
+        <div class="col-md-2">
+            <img alt="" style="width:70%;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario"> 
+        </div>
+        <div class="col-md-12">
+            <strong style="margin-left:2%">Information</strong><br>
+            <div class="table-responsive">
+            <table class="table table-user-information">
+                <tbody>
+                    {%for user2 in user2 %}
+                    <tr>    
+                        <td>
+                            <strong>
+                               Agency Name :                                                
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.agencyname}}   
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong> 
+                               First Name :                                            
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.transportname1}}   
+                        </td>
+                    </tr>
+
+                    <tr>        
+                        <td>
+                            <strong>
+                                Last Name :                                              
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.transportname2}}  
+                        </td>
+                    </tr>
+
+
+                    <tr>        
+                        <td>
+                            <strong>
+                                No of Trucks :                                          
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.transporttruck}}  
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                Contact Number :                                               
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.transportcontact}} 
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                Address Line 1 :                                               
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.transportaddress}} 
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                Address Line 2  :                                          
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.transportaddress1}} 
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                State :                                
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.transportstate}} 
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                District :                                           
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.transportdistrict}} 
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                Taluka :                                     
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.transporttaluka}} 
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                City :                                      
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.transportcity}} 
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                Aadhar Card Number :                                        
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.transportaadhar}} 
+                        </td>
+                    </tr>
+                    <tr>        
+                        <td>
+                            <strong>
+                                GST No :                                          
+                            </strong>
+                        </td>
+                        <td class="text-primary">
+                            {{user2.transportgst}} 
+                        </td>
+                    </tr>
+                {%endfor%}                                    
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+
+</div> 
+</div>
+<div class="text-center md-3">
+    <button type="button" class="btn btn-success" target="_blank" >Update</button>
+
+</div> 
+                                    
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	
+</script>
+</body>
+</html>
+
+{% endblock content %}

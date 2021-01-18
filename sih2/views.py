@@ -13,6 +13,35 @@ from . utils import CookieCart ,cartData,guestOrder
 from django.core.serializers.json import DjangoJSONEncoder
 # Create your views here.
 relation=[]
+
+def profile_farmer(request):
+    if request.user.is_authenticated:
+
+        user1=request.user.get_username()
+        user2=Farmer_register.objects.filter(username=user1)
+        if user2.exists():
+
+            return render(request,'profile_farmer.html',{'user2':user2})
+        else:
+            return render(request,'profile_farmer.html')
+    else:
+        return render(request,'profile_farmer.html')
+
+def profile_transport(request):
+    if request.user.is_authenticated:
+
+        user1=request.user.get_username()
+        user2=Transport_register.objects.filter(agencyname=user1)
+        print(user1)
+        print(user2)
+        if user2.exists():
+
+            return render(request,'profile_transport.html',{'user2':user2})
+        else:
+            return render(request,'profile_transport.html')
+    else:
+        return render(request,'profile_transport.html')
+
 def product(request):
     return render(request,"product.html")
 def cart(request):
