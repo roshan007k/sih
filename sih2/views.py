@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .models import Product,Farmer_register,Transport_register, Order,Customer,OrderItem,ShippingAddress,ToDeliver,CompletedDeliveries,Comment
+from .models import Product,Farmer_register,Transport_register, Order,Customer,OrderItem,ShippingAddress,ToDeliver,CompletedDeliveries,Comment,Transport_notifications,Farmer_notifications,Buyer_notifications
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.http import JsonResponse
@@ -38,6 +38,19 @@ def profile_transport(request):
             return render(request,'profile_transport.html')
     else:
         return render(request,'profile_transport.html')
+
+
+
+
+
+
+
+
+
+
+
+
+        
 def product(request, id):
     data = cartData(request)
     cartItems = data['cartItems']
@@ -384,8 +397,56 @@ def processOrder(request):
     for customer2 in buyer:
         customer1=customer2.customer
         print(customer1)
-    relation.append([farmer3.username,customer1])
-    print(relation)
+
+    Transport_notifications.objects.create(
+        farmer=farmer3.username,
+        agencyname=data['shipping']['agencyname'],
+        username=farmer3.username,
+        firstname=farmer3.firstname,
+        lastname=farmer3.lastname,
+        password=farmer3.password,
+        confirmpassword=farmer3.confirmpassword,
+        email=farmer3.email,
+        contact_number=farmer3.contact_number,
+        address=farmer3.address,
+        address1=farmer3.address1,
+        state=farmer3.state,
+        district=farmer3.district,
+        taluka=farmer3.taluka,
+        city=farmer3.city,
+        zipcode=farmer3.zipcode
+    )
+    
+    Agency1=Transport_register.objects.get(agencyname=data['shipping']['agencyname'])
+    Farmer_notifications.objects.create(
+        agencyname=Agency1.agencyname,
+        transportname1=Agency1.transportname1,
+        transportname2=Agency1.transportname2,
+        transportpassword=Agency1.agencyname,
+        transportcost=Agency1.transportcost,
+        transporttruck=Agency1.transporttruck,
+        transportcontact=Agency1.transportcontact,
+        transportaddress=Agency1.transportaddress,
+        transportaddress1=Agency1.transportaddress1,
+        transportstate=Agency1.transportstate,
+        transportdistrict=Agency1.transportdistrict,
+        transporttaluka=Agency1.transporttaluka,
+        transportcity=Agency1.transportcity,
+        transportcode=Agency1.transportcode,
+        transportaadhar=Agency1.transportaadhar,
+        transportgst=Agency1.transportgst,
+        aadhar = Agency1.aadhar
+
+    )
+    Buyer_notifications.objects.create(
+        customer = customer,
+        order = order,
+        address=data['shipping']['address'],
+		city=data['shipping']['city'],
+		state=data['shipping']['state'],
+		zipcode=data['shipping']['zipcode'],
+        farmer=farmer3
+    )
     # farmer1=Product.objects.filter(id=product_id)
     # for farmer in farmer1:
     #     farmer2=farmer.farmer
@@ -443,7 +504,38 @@ def about(request):
     return render(request,'about.html')
 def blog(request):
     return render(request,'blog.html')
+def transport_notifications(request):
+    if request.user.is_authenticated:
+        agency=request.user.get_username()
+        user1=Transport_notifications.objects.filter(agencyname=agency)
+    else:
+        return redirect('transportlogin')
 
+
+    return render(request,'transport_notifications.html',{'users':user1})
+def farmer_notification(request):
+    if request.user.is_authenticated:
+        farmer=Farmer_register.objects.get(username=request.user)
+        # farmer1 = get_object_or_404(farmer)
+        user1=Buyer_notifications.objects.filter(farmer=farmer)
+        print(user1)
+    else:
+        return redirect('farmerlogin')
+
+
+    return render(request,'farmer_notification.html',{'users':user1})
+def delivery_notification(request):
+    if request.user.is_authenticated:
+        farmer=Farmer_register.objects.get(username=request.user)
+        user1=Transport_notifications.objects.get(farmer=farmer)
+        user1=user1.agencyname
+        user2=Farmer_notifications.objects.filter(agencyname=user1)
+        
+    else:
+        return redirect('farmerlogin')
+
+
+    return render(request,'delivery_notification.html',{'users':user2})
 
 
 

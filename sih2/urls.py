@@ -27,5 +27,8 @@ urlpatterns = [
     path("about",views.about, name="about"),
     path("blog",views.blog, name="blog"),
     path("profile_farmer",views.profile_farmer, name="profile_farmer"),
-    path("profile_transport",views.profile_transport, name="profile_transport")
+    path("profile_transport",views.profile_transport, name="profile_transport"),
+    path("transport_notifications",views.transport_notifications, name="transport_notifications"),
+    path("farmer_notification",views.farmer_notification, name="farmer_notification"),
+    path("delivery_notification",views.delivery_notification, name="delivery_notification")
 ]
