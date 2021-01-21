@@ -3,7 +3,9 @@ from django.contrib.auth.models import User, auth
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
+
 from .models import Product,Farmer_register,Transport_register, Order,Customer,OrderItem,ShippingAddress,ToDeliver,CompletedDeliveries,Comment,Transport_notifications,Farmer_notifications,Buyer_notifications
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.http import JsonResponse
@@ -38,18 +40,6 @@ def profile_transport(request):
             return render(request,'profile_transport.html')
     else:
         return render(request,'profile_transport.html')
-
-
-
-
-
-
-
-
-
-
-
-
         
 def product(request, id):
     data = cartData(request)
@@ -447,6 +437,7 @@ def processOrder(request):
 		zipcode=data['shipping']['zipcode'],
         farmer=farmer3
     )
+
     # farmer1=Product.objects.filter(id=product_id)
     # for farmer in farmer1:
     #     farmer2=farmer.farmer
@@ -536,6 +527,7 @@ def delivery_notification(request):
 
 
     return render(request,'delivery_notification.html',{'users':user2})
+
 
 
 

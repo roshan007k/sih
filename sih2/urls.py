@@ -31,4 +31,5 @@ urlpatterns = [
     path("transport_notifications",views.transport_notifications, name="transport_notifications"),
     path("farmer_notification",views.farmer_notification, name="farmer_notification"),
     path("delivery_notification",views.delivery_notification, name="delivery_notification")
+
 ]
