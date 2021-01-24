@@ -30,6 +30,10 @@ urlpatterns = [
     path("profile_transport",views.profile_transport, name="profile_transport"),
     path("transport_notifications",views.transport_notifications, name="transport_notifications"),
     path("farmer_notification",views.farmer_notification, name="farmer_notification"),
-    path("delivery_notification",views.delivery_notification, name="delivery_notification")
+    path("delivery_notification",views.delivery_notification, name="delivery_notification"),
+    path("display_farmerprofile/<int:id>",views.display_farmerprofile, name="display_farmerprofile"),
+    path("profile_user",views.profile_user, name="profile_user"),
+    path("update_farmer",views.update_farmer, name="update_farmer"),
+    path("update_transport",views.update_transport, name="update_transport"),   
 
 ]

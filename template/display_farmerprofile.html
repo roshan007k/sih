@@ -1,0 +1,199 @@
+{% extends "index2.html" %}
+
+{% block content %}
+
+
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-2">
+                <img alt="" style="width:70%;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario"> 
+            </div>
+            <div class="col-md-12">
+                <strong style="margin-left:2%">Information</strong><br>
+                <div class="table-responsive">
+                <table class="table table-user-information">
+                    <tbody>
+                        {%for user2 in  users%}
+                        <tr>    
+                            <td>
+                                <strong>
+                                    Name                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{user2.firstname}}   
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong> 
+                                    Lastname                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{user2.lastname}}   
+                            </td>
+                        </tr>
+    
+                        <tr>        
+                            <td>
+                                <strong>
+                                    Email                                             
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{user2.email}}  
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    Contact Number                                               
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{user2.contact_number}} 
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    Address Line 1                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{user2.address}} 
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    Address Line 2                                            
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{user2.address1}} 
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    State                                            
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{user2.state}} 
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    District                                           
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{user2.district}} 
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    Taluka                                         
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{user2.taluka}} 
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    City                                          
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{user2.city}} 
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    Zip Code                                        
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{user2.zipcode}} 
+                            </td>
+                        </tr>
+                    {%endfor%}                                    
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    
+    </div> 
+    </div>
+    <h4>PRODUCTS UPLOADED</h4>
+    <div class="container">
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="product">
+                    <a href="/product/{{product.id}}" class="img-prod"><img class="img-fluid" src="{{product.img.url }}" alt="Colorlib Template">
+                        <span class="status">30%</span>
+                        <div class="overlay"></div>
+                    </a>
+                    <div class="text py-3 pb-4 px-3 text-center">
+                        <h3><a href="/product/{{product.id}}">{{product.name}}</a></h3>
+                        <div class="d-flex">
+                            <div class="pricing">
+                                <p class="price"><span class="mr-2 price-dc">&#8377 120.00</span><span class="price-sale">&#8377 {{product.price}}</span></p>
+                            </div>
+                        </div>
+                        <div class="bottom-area d-flex px-3 mb-2">
+                            <div class="m-auto d-flex mb-2">
+                <button data-product="{{product.id}}" data-action="add" class=" btn  btn-outline-secondary add-btn update-cart">Add to Cart</button>
+              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <h3>Average Product Rating : {{average}}</h3>
+    <h4 style="margin-top: 15px;">Customer Reviews</h4>
+        
+        <div class="col-md-6 my-4">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Review</th>
+                    <th scope="col">Rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for com in c %}
+                <tr>
+                    <td>{{com.customer}}</td>
+                    <td>{{com.subject}}</td>
+                    <td>{{com.comment}}</td>
+                    <td>
+                        <i class="fa fa-star{% if com.rate < 1 %}-o empty{% endif %}"></i>
+                        <i class="fa fa-star{% if com.rate < 2 %}-o empty{% endif %}"></i>
+                        <i class="fa fa-star{% if com.rate < 3 %}-o empty{% endif %}"></i>
+                        <i class="fa fa-star{% if com.rate < 4 %}-o empty{% endif %}"></i>
+                        <i class="fa fa-star{% if com.rate < 5 %}-o empty{% endif %}"></i>
+                    </td>
+                </tr>
+                {%endfor%}
+                </tbody>
+            </table>
+            
+        </div>
+
+{% endblock content %}

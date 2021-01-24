@@ -40,6 +40,21 @@ def profile_transport(request):
             return render(request,'profile_transport.html')
     else:
         return render(request,'profile_transport.html')
+
+def profile_user(request):
+    if request.user.is_authenticated:
+
+        user1=request.user.get_username()
+        user2=Customer.objects.filter(name=user1)
+        print(user1)
+        print(user2)
+        if user2.exists():
+
+            return render(request,'profile_user.html',{'user2':user2})
+        else:
+            return render(request,'profile_user.html')
+    else:
+        return render(request,'profile_user.html')
         
 def product(request, id):
     data = cartData(request)
@@ -52,13 +67,15 @@ def product(request, id):
         subject = request.POST['subject']
         comment = request.POST['comment']
         rate = request.POST['rate']
+        farmer=product1.farmer.username
+        farmer1=Farmer_register.objects.get(username=farmer)
         current_user = request.user
         
         #customer = Customer.objects.get(id=id)
     
         if Customer.objects.filter(id=id).exists():
             customer = Customer.objects.get(id=id)
-            comment1 = Comment.objects.create(product = product1, user = current_user, customer = customer, comment = comment, rate = rate, subject=subject)
+            comment1 = Comment.objects.create(product = product1,farmer=farmer1, user = current_user, customer = customer, comment = comment, rate = rate, subject=subject)
             comment1.save()
             messages.info(request, "Review Sent Successfully")
             c = Comment.objects.filter(product = product1)
@@ -528,6 +545,127 @@ def delivery_notification(request):
 
     return render(request,'delivery_notification.html',{'users':user2})
 
+def display_farmerprofile(request, id):
+    product = Product.objects.get(id = id)
+    user2 = Farmer_register.objects.filter(username = product.farmer.username)
+    products = Product.objects.filter(farmer = product.farmer)
+    c = Comment.objects.filter(farmer = product.farmer)
+    count = Comment.objects.filter(farmer = product.farmer).count()
+    sum = 0
+    for average in c:
+        sum += average.rate
+    average = sum/count
+    print(average)
+    return render(request, "display_farmerprofile.html", {'users':user2, 'products':products, 'c':c, 'average':average})
 
 
-
+def update_farmer(request):
+    user1=request.user.get_username()
+    user2=Farmer_register.objects.filter(username=user1)
+    if request.method=="POST":
+        user3=Farmer_register.objects.get(username=user1)
+        print(user3)
+        if request.POST["name"]:
+            user3.firstname=request.POST["name"]
+            user3.save()
+            print(user3.firstname)
+        if request.POST["lastname"]:
+            user3.lastname=request.POST["lastname"]
+            user3.save()
+        if request.POST["username"]:
+            temp=User.objects.get(username=user1)
+            temp.username=request.POST["username"]
+            user3.username=request.POST["username"]
+            user3.save()
+            temp.save()
+        if request.POST["email"]:
+            user3.email=request.POST["email"]
+            user3.save()
+        if request.POST["contact"]:
+            user3.contact_number=request.POST["contact"]
+            user3.save()
+        if request.POST["address"]:
+            user3.address=request.POST["address"]
+            user3.save()
+        if request.POST["address1"]:
+            user3.address1=request.POST["address1"]
+            user3.save()
+        if request.POST["state"]:
+            user3.state=request.POST["state"]
+            user3.save()
+        if request.POST["district"]:
+            user3.district=request.POST["district"]
+            user3.save()
+        if request.POST["taluka"]:
+            user3.taluka=request.POST["taluka"]
+            user3.save()
+        if request.POST["city"]:
+            user3.city=request.POST["city"]
+            user3.save()
+        if request.POST["zipcode"]:
+            user3.zipcode=request.POST["zipcode"]
+            user3.save()
+        return render(request,'profile_farmer.html',{'user2':user2})
+    else:
+        return render(request,"update_farmer.html",{'user2':user2})
+def update_transport(request):
+    user1=request.user.get_username()
+    user2=Transport_register.objects.filter(agencyname=user1)
+    if request.method=="POST":
+        user3=Transport_register.objects.get(agencyname=user1)
+        print(user3)
+        if request.POST["agencyname"]:
+            temp=User.objects.get(username=user1)
+            temp.username=request.POST["agencyname"]
+            user3.agencyname=request.POST["agencyname"]
+            user3.save()
+            temp.save()
+            print(user3.agencyname)
+        if request.POST["transportname1"]:
+            user3.transportname1=request.POST["transportname1"]
+            user3.save()
+        if request.POST["transportname2"]:
+            user3.transportname2=request.POST["transportname2"]
+            user3.save()
+        if request.POST["transporttruck"]:
+            user3.transporttruck=request.POST["transporttruck"]
+            user3.save()
+        if request.POST["transportcontact"]:
+            user3.transportcontact=request.POST["transportcontact"]
+            user3.save()
+        if request.POST["transportaddress"]:
+            user3.transportaddress=request.POST["transportaddress"]
+            user3.save()
+        if request.POST["transportaddress1"]:
+            user3.transportaddress1=request.POST["transportaddress1"]
+            user3.save()
+        if request.POST["transportstate"]:
+            user3.transportstate=request.POST["transportstate"]
+            user3.save()
+        if request.POST["transportdistrict"]:
+            user3.transportdistrict=request.POST["transportdistrict"]
+            user3.save()
+        if request.POST["transporttaluka"]:
+            user3.transporttaluka=request.POST["transporttaluka"]
+            user3.save()
+        if request.POST["transportcity"]:
+            user3.transportcity=request.POST["transportcity"]
+            user3.save()
+        if request.POST["transportcode"]:
+            user3.transportcode=request.POST["transportcode"]
+            user3.save()
+        if request.POST["transportaadhar"]:
+            user3.transportaadhar=request.POST["transportaadhar"]
+            user3.save()
+        if request.POST["transportgst"]:
+            user3.transportgst=request.POST["transportgst"]
+            user3.save()
+        if request.POST["transportcost"]:
+            user3.transportcost=request.POST["transportcost"]
+            user3.save()
+        if request.POST["myFile"]:
+            user3.aadhar=request.POST["myFile"]
+            user3.save()
+        return render(request,'profile_transport.html',{'user2':user2})
+    else:
+        return render(request,"update_transport.html",{'user2':user2})

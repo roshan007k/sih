@@ -22,8 +22,8 @@
             <h5><strong>{{product.name}}</strong></h5>
             <h4><strong>Rs. {{product.price}}</strong></h4>
             <p>{{product.description}}</p>
-            <p><h5><strong>Seller : </strong></h5></p>
-            <p><h4><strong>Ratings & Reviews</strong></h4></p>
+            <p><h5><strong>Farmer/Seller : <a href="/display_farmerprofile/{{product.id}}" style="color: blue;">{{product.farmer}}</a></strong></h5></p>
+            <h5><strong>Contact No:{{product.farmer.contact_number}}</strong></h5>
             <a href="/cart">
                 <button class="btn btn-primary">
                     Go to Cart

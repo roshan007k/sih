@@ -103,7 +103,6 @@ class Order(models.Model):
 	    return total
 
 class OrderItem(models.Model):
-    farmer=models.ForeignKey(Farmer_register,on_delete=models.SET_NULL, null=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
@@ -153,6 +152,7 @@ class ToDeliver(models.Model):
     def __str__(self):
         return self.address
 class Comment(models.Model):
+    farmer=models.ForeignKey(Farmer_register,on_delete=models.CASCADE, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)

@@ -1,0 +1,224 @@
+{% extends "index2.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>Edit profile page - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+    	
+
+body{
+    margin-top:20px;
+    background:#f5f5f5;
+    
+}
+/**
+ * Panels
+ */
+/*** General styles ***/
+.panel {
+  box-shadow: none;
+}
+.panel-heading {
+  border-bottom: 0;
+}
+.panel-title {
+  font-size: 17px;
+}
+.panel-title > small {
+  font-size: .75em;
+  color: #999999;
+}
+.panel-body *:first-child {
+  margin-top: 0;
+}
+.panel-footer {
+  border-top: 0;
+}
+
+.panel-default > .panel-heading {
+    color: #333333;
+    background-color: transparent;
+    border-color: rgba(0, 0, 0, 0.07);
+}
+
+form label {
+    color: #999999;
+    font-weight: 400;
+}
+
+.form-horizontal .form-group {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+@media (min-width: 768px) {
+  .form-horizontal .control-label {
+    text-align: right;
+    margin-bottom: 0;
+    padding-top: 7px;
+  }
+}
+
+.profile__contact-info-icon {
+    float: left;
+    font-size: 18px;
+    color: #999999;
+}
+.profile__contact-info-body {
+    overflow: hidden;
+    padding-left: 20px;
+    color: #999999;
+}
+.profile-avatar {
+  width: 200px;
+  position: relative;
+  margin: 0px auto;
+  margin-top: 196px;
+  border: 4px solid #f3f3f3;
+}
+    </style>
+</head>
+<body>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container bootstrap snippets bootdeys">
+<div class="row">
+  <div class="col-xs-12 col-sm-9">
+    <form method="POST" action="update_transport" class="form-horizontal">
+      {% csrf_token %}
+        <div class="panel panel-default">
+          <div class="panel-body text-center">
+            <img alt="" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">
+          </div>
+        </div>
+      <div class="panel panel-default">
+        
+        <div class="panel-heading">
+        <h4 class="panel-title">Information</h4>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Agency Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name ="agencyname">
+                </div>
+              </div>           
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Transport Name 1</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name ="transportname1">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Transport Name 2</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name ="transportname2">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">No of Trucks</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name ="transporttruck">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Contact Number</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name ="transportcontact">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Address Line 1</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name ="transportaddress">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Address Line 2</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name ="transportaddress1">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">State</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name ="transportstate">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">District</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name ="transportdistrict">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Taluka</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name ="transporttaluka">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">City</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name ="transportcity">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Zip Code</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name ="transportcode">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Aadhar Card No</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name ="transportaadhar">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">GST No</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name ="transportgst">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Cost/Km</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name ="transportcost">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Upload Aadhar Card</label>
+            <div class="col-sm-10">
+              <input type="file" name="myFile">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+              <input type="submit" value="update" class="btn btn-primary py-3 px-5">
+              <button type="reset" class="btn btn-default">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form> 
+  </div>
+</div>
+</div>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	
+
+</script>
+</body>
+</html>
+
+{% endblock content %}
