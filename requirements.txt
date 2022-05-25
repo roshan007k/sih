@@ -15,7 +15,7 @@ joblib==0.14.1
 numpy==1.18.1
 Pillow==7.0.0
 psycopg2==2.8.4
-PyJWT==1.7.1
+PyJWT==2.4.0
 python-dateutil==1.5
 python-decouple==3.4
 pytz==2019.3
